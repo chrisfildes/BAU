@@ -20,7 +20,7 @@ namespace Web.Controllers
 
         public IActionResult Add()
         {
-            service.PopulateNextSlot();
+            service.Populate(1);
             return RedirectToAction("Index");
         }
     }

@@ -8,7 +8,7 @@ using BAU.Data.Interfaces;
 
 namespace BAU.Business.Services
 {
-    public class ScheduleService : IScheduleService
+        public class ScheduleService : IScheduleService
     {
         private ISupportSlotRepository _supportSlotRepo;
         private IEngineerRepository _engineerRepo;
@@ -32,7 +32,7 @@ namespace BAU.Business.Services
 
             if (slots.Count > 0)
             {
-               
+
                 schedule.Dates = new List<ScheduleDate>();
                 DateTime endDate = slots.Max(e => e.Date);
                 DateTime currentDate = monday;
@@ -53,7 +53,7 @@ namespace BAU.Business.Services
 
 
                         schedule.Dates.Add(newCalendarDate);
-                        
+
                     }
                     currentDate = currentDate.AddDays(1);
                 }
@@ -63,58 +63,48 @@ namespace BAU.Business.Services
             return schedule;
         }
 
-        
-        public void PopulateNextSlot()
+        public DateTime GetStartDate(SupportSlot lastSlot)
         {
-            Func<Engineer, bool> available = (p => p.IsAvailable == true);
-            List<Engineer> engineers = _engineerRepo.Find(available).OrderBy(x => Guid.NewGuid()).ToList();
-
-            DateTime monday = DateTime.Now.AddDays(-(int)DateTime.Today.DayOfWeek
+            if (lastSlot == null)
+            {
+                return DateTime.Now.AddDays(-(int)DateTime.Today.DayOfWeek
                  + (int)DayOfWeek.Monday).Date;
-
-            Schedule s = GetSchedule(monday);
-
-            // Get next date available
-
-            DateTime nextDate = monday;
-            int LastEngineerID = 0;
-            if (s.Dates != null)
-            {
-                ScheduleDate lastDate = s.Dates.Last();
-                nextDate = lastDate.When.AddDays(1);
-                LastEngineerID = lastDate.Slots.Last().EngineerID;
             }
+            return lastSlot.Date.AddDays(3);
+        }
 
 
-            if (nextDate.DayOfWeek == DayOfWeek.Saturday)
+        public void Populate(int noWeeks)
+        {
+            // Work out which week to populate next, and get who was last engineer to do a slot
+            SupportSlot lastSlot = _supportSlotRepo.Find(e => e.Date >= DateTime.Now).OrderByDescending(e => e.Date).ThenByDescending(e => e.Slot).Take(1).SingleOrDefault();
+            DateTime currentDate = GetStartDate(lastSlot);
+            int lastEngineerID = (lastSlot == null ? 0 : lastSlot.EngineerID);
+
+            // Create an pool of engineers to randomly pull from. Will not repeat engineer until all pulled.
+            EngineerPool engineerPool = new EngineerPool();
+            engineerPool.Add(_engineerRepo.Find(e => e.IsAvailable == true).ToList());
+
+            for (int w = 0; w < noWeeks; w++)
             {
-                nextDate = nextDate.AddDays(2);
+                for (int d = 0; d < 5; d++)
+                {
+                    for (int s = 0; s < 2; s++)
+                    {
+                        Engineer e = engineerPool.PullRandom();
+                        SupportSlot slot = new SupportSlot
+                        {
+                            EngineerID = e.ID,
+                            Date = currentDate,
+                            Slot = s
+                        };
+
+                        _supportSlotRepo.Add(slot);
+
+                    }
+                    currentDate = currentDate.AddDays(1);
+                }
             }
-            if (nextDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                nextDate = nextDate.AddDays(2);
-            }
-
-
-            // Assign first random Engineer ensuring it's not the same one in the previous slot
-            Engineer firstEngineer = engineers.Where(e => e.IsAvailable == true && e.ID != LastEngineerID).FirstOrDefault();
-            SupportSlot firstSlot = new SupportSlot
-            {
-                Date = nextDate,
-                Slot = 1,
-                EngineerID = firstEngineer.ID
-            };
-            _supportSlotRepo.Add(firstSlot);
-
-            // Assign next random Engineer, ensuring it's not the same one in the previous slot
-            Engineer secondEngineer = engineers.Where(e => e.IsAvailable == true && e.ID != firstSlot.EngineerID).FirstOrDefault();
-            SupportSlot secondSlot = new SupportSlot
-            {
-                Date = nextDate,
-                Slot = 2,
-                EngineerID = secondEngineer.ID
-            };
-            _supportSlotRepo.Add(secondSlot);
 
         }
     }

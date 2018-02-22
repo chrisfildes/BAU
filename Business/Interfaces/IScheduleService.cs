@@ -7,6 +7,6 @@ namespace BAU.Business.Interfaces
     public interface IScheduleService
     {
         Schedule GetSchedule(DateTime startDate);
-        void PopulateNextSlot();
+        void Populate(int noWeeks);
     }
 }
