@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BAU.Data.Models.ScheduleDate>
+
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Schedule</div>
+    <div class="panel-body">
+        <a href="@Url.Action("Add")" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span> Slot
+        </a>
+
+        @if (Model != null)
+        {
+            <table class="table" style="margin: 4px">
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Engineers
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (var day in Model)
+                {
+                    <tr>
+                        <td>@day.When.ToString("dddd dd MMM yyyy")</td>
+                        <td>
+                            @foreach (var slot in day.Slots)
+                            {
+                                @slot.EngineerName<br />
+                            }
+                        </td>
+                </tr>
+
+                @if (day.When.DayOfWeek == DayOfWeek.Friday)
+                {
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+
+                }
+
+
+            }
+
+            </table>
+
+        }
+
+    </div>
+</div>
+
+

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BAU.Data.Models.Engineer>
+
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Engineers</div>
+    <div class="panel-body">
+        <a  href="@Url.Action("Create")" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span> Engineer
+        </a>
+
+        @if (Model != null)
+    {
+        <table class="table" style="margin: 4px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAvailable)
+                </th>
+                <th>
+                    Action
+                </th>
+
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(@modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+    }
+
+        </table>
+
+
+}
+
+    </div>
+</div>
+
+
