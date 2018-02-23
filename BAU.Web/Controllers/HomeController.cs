@@ -8,25 +8,17 @@ using BAU.Models;
 
 namespace BAU.Controllers
 {
+    /*  EngineersController
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Controller for home page
+    */
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

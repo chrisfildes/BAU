@@ -4,6 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BAU.Data.Models
 {
+    /*  Schedule
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Data Model for Schedule view
+     */
+
     public class ScheduleSlot
     {
         public int EngineerID;

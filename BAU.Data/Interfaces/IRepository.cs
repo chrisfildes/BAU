@@ -5,6 +5,13 @@ using System.Text;
 
 namespace BAU.Data.Interfaces
 {
+    /*  IEngineerRepository
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Interface for generic Repository
+    */
+
     public interface IRepository<T> where T : class
     {
         IEnumerable<T> FindAll();

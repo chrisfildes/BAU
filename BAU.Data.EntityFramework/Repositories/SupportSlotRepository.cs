@@ -7,15 +7,23 @@ using BAU.Data.Interfaces;
 
 namespace BAU.Data.EntityFramework
 {
+    /*  SupportSlotRepository
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Implementation of Data Layer for Support Slots. Repository implementation passed in with Dependency Injection   
+    */
+
     public class SupportSlotRepository : DbContext, ISupportSlotRepository
     {
         DbSet<SupportSlot> SupportSlots { get; set; }
         DbSet<Engineer> Engineers { get; set; }
-        
-        public SupportSlotRepository(DbContextOptions<SupportSlotRepository> options) : base(options) {
+
+        public SupportSlotRepository(DbContextOptions<SupportSlotRepository> options) : base(options)
+        {
         }
 
-        public  IEnumerable<SupportSlot> FindAll()
+        public IEnumerable<SupportSlot> FindAll()
         {
             return SupportSlots;
         }
@@ -31,12 +39,12 @@ namespace BAU.Data.EntityFramework
             return SupportSlots.Where(e => e.ID == Id).SingleOrDefault();
         }
 
-       
+
         public void Add(SupportSlot slot)
         {
             SupportSlots.Add(slot);
             this.SaveChanges();
-            
+
         }
 
         public void Update(SupportSlot slot)
@@ -54,7 +62,5 @@ namespace BAU.Data.EntityFramework
             SupportSlots.Remove(entity);
             this.SaveChanges();
         }
-
-
     }
 }

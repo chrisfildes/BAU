@@ -9,7 +9,12 @@ using BAU.Website.Models;
 
 namespace Web.Controllers
 {
-    // Test comment 
+    /*  EngineersController
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Controller for Engineer presentation layer functionality, using service passed in with Dependency Injection
+    */
 
     public class EngineersController : Controller
     {
@@ -21,7 +26,7 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var  model = service.FindAll();
+            var model = service.FindAll();
             return View(model);
         }
 

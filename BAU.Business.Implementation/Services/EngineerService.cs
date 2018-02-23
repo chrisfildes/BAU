@@ -8,13 +8,20 @@ using BAU.Data.Interfaces;
 
 namespace BAU.Business.Services
 {
+    /*  EngineerService
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Implementation of Business Layer for Engineers. Repository implementation passed in with Dependency Injection   
+    */
+
     public class EngineerService : IEngineerService
     {
         private IEngineerRepository repo;
         public EngineerService(IEngineerRepository repository)
         {
             // Constructor Injection
-            repo = repository;          
+            repo = repository;
         }
 
         public List<Engineer> FindAll()
@@ -41,6 +48,5 @@ namespace BAU.Business.Services
         {
             repo.Remove(Id);
         }
-        
     }
 }

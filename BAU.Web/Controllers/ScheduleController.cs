@@ -4,6 +4,13 @@ using BAU.Business.Interfaces;
 
 namespace Web.Controllers
 {
+    /*  ScheduleController
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Controller for Schedule presentation layer functionality, using service passed in with Dependency Injection
+        */
+
     public class ScheduleController : Controller
     {
         private IScheduleService service;
@@ -14,13 +21,13 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            var model = service.GetSchedule(DateTime.Now);
+            var model = service.Get(DateTime.Now);
             return View(model);
         }
 
         public IActionResult Add()
         {
-            service.Populate();
+            service.PopulateNextSlots();
             return RedirectToAction("Index");
         }
     }

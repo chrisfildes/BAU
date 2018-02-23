@@ -4,9 +4,16 @@ using BAU.Data.Models;
 
 namespace BAU.Business.Interfaces
 {
+    /*  IScheduleService
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Interface for Business Layer of Engineer Schedule
+    */
+
     public interface IScheduleService
     {
-        Schedule GetSchedule(DateTime startDate);
-        void Populate();
+        Schedule Get(DateTime startDate);
+        void PopulateNextSlots();
     }
 }

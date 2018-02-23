@@ -7,13 +7,19 @@ using BAU.Data.Interfaces;
 
 namespace BAU.Data.EntityFramework
 {
-    public class EngineerRepository : DbContext, IEngineerRepository
-    {
+    /*  EngineerRepository
+
+        Author: Chris Fildes
+        Date: 22/02/2018
+        Description: Implementation of Data Layer for Engineers. Repository implementation passed in with Dependency Injection   
+    */
+
+    public class EngineerRepository : DbContext, IEngineerRepository { 
 
         DbSet<Engineer> Engineers { get; set; }
 
-        public EngineerRepository(DbContextOptions<EngineerRepository> options) : base(options) {
-            
+        public EngineerRepository(DbContextOptions<EngineerRepository> options) : base(options)
+        {
         }
 
         public Engineer FindById(int Id)
@@ -35,7 +41,7 @@ namespace BAU.Data.EntityFramework
         {
             Engineers.Add(engineer);
             this.SaveChanges();
-            
+
         }
 
         public void Update(Engineer engineer)
@@ -53,7 +59,5 @@ namespace BAU.Data.EntityFramework
             Engineers.Remove(entity);
             this.SaveChanges();
         }
-
-
     }
 }
