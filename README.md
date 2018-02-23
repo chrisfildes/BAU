@@ -1,6 +1,6 @@
-# BAU
+# BAU  - Support Wheel Of Fate
 
-# Brief Description
+## Brief Description
 
 My implementation allows a user to populate the next 2 free weeks in a Schedule as per the requirements. 
 
