@@ -1,44 +1,44 @@
 # BAU
 
-Brief Description
+# Brief Description
 
-  My implementation allows a user to populate the next 2 free weeks in a Schedule as per the requirements. 
+My implementation allows a user to populate the next 2 free weeks in a Schedule as per the requirements. 
 
-  They can also create and update Engineer information, including making an Engineer unavailable for scheduling.
+They can also create and update Engineer information, including making an Engineer unavailable for scheduling.
 
-Where You Can See It
+## Where You Can See It
 
   Demo http://amigo-bau.azurewebsites.net
   Code https://github.com/chrisfildes/bau
 
-Overall Architecture
+## Overall Architecture
   
   ASP.NET Core 2.0
   Hosted on Azure
   SQL Server Azure database
 
-API
+## API
 
   Data Layer (using Entity Framework Code First)
 
-Business Layer
+## Business Layer
 
   Loosely coupled so either can be swapped out
 
-Presentation Layer
+## Presentation Layer
   
   ASP.NET MVC Core using Razor
   Bootstrap 
   Uses minimised versions of css/js on production site
   Using Dependency Injection to select which Business Layer / Data Layer to use
 
-Pages
+## Pages
   
   Homepage (just holding page)
   Schedule (to view upcoming schedule and populate the next slot)
   Engineers (to view all Engineers with ability to add and amend details
   
-Structure Overview
+#### Structure Overview
 
   Data Layer
 
