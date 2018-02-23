@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BAU.Business.Interfaces;
 using BAU.Data.Models;
+using BAU.Business.Interfaces;
 using BAU.Website.Models;
 
 namespace Web.Controllers

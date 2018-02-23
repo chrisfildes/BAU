@@ -18,13 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Business.Implementation\Business.Implementation.csproj" />
-    <ProjectReference Include="..\Business\Business.csproj" />
-    <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
-    <ProjectReference Include="..\Data\Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PropertyPageSchema Remove="Page.xaml" />
   </ItemGroup>
 
@@ -32,6 +25,13 @@
     <Page Include="Page.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BAU.Business.Implementation\BAU.Business.Implementation.csproj" />
+    <ProjectReference Include="..\BAU.Business\BAU.Business.csproj" />
+    <ProjectReference Include="..\BAU.Data.EntityFramework\BAU.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\BAU.Data\BAU.Data.csproj" />
   </ItemGroup>
 
 </Project>

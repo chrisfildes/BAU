@@ -24,7 +24,7 @@ namespace BAU.Business.Services
 
         public Engineer Find(int id)
         {
-            return repo.Find(id);
+            return repo.FindById(id);
         }
 
         public void Add(Engineer e)
@@ -37,9 +37,9 @@ namespace BAU.Business.Services
             repo.Update(e);
         }
 
-        public void Remove(int id)
+        public void Remove(int Id)
         {
-            repo.Remove(id);
+            repo.Remove(Id);
         }
         
     }

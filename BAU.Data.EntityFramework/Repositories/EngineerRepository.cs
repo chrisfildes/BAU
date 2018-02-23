@@ -16,9 +16,9 @@ namespace BAU.Data.EntityFramework
             
         }
 
-        public Engineer Find(int ID)
+        public Engineer FindById(int Id)
         {
-            return Engineers.Find(ID);
+            return Engineers.Find(Id);
         }
 
         public IEnumerable<Engineer> Find(Func<Engineer, bool> where)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BAU.Business.Interfaces;
 using BAU.Data.Models;
 using BAU.Data.Interfaces;
@@ -74,8 +73,10 @@ namespace BAU.Business.Services
         }
 
 
-        public void Populate(int noWeeks)
+        public void Populate()
         {
+            int noWeeks = 2;
+
             // Work out which week to populate next, and get who was last engineer to do a slot
             SupportSlot lastSlot = _supportSlotRepo.Find(e => e.Date >= DateTime.Now).OrderByDescending(e => e.Date).ThenByDescending(e => e.Slot).Take(1).SingleOrDefault();
             DateTime currentDate = GetStartDate(lastSlot);
@@ -104,6 +105,7 @@ namespace BAU.Business.Services
                     }
                     currentDate = currentDate.AddDays(1);
                 }
+                currentDate = currentDate.AddDays(2);
             }
 
         }

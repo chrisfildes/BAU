@@ -15,12 +15,12 @@ namespace Web.Controllers
         public IActionResult Index()
         {
             var model = service.GetSchedule(DateTime.Now);
-            return View(model.Dates);
+            return View(model);
         }
 
         public IActionResult Add()
         {
-            service.Populate(1);
+            service.Populate();
             return RedirectToAction("Index");
         }
     }

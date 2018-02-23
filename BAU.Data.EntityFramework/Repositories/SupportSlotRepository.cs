@@ -15,9 +15,9 @@ namespace BAU.Data.EntityFramework
         public SupportSlotRepository(DbContextOptions<SupportSlotRepository> options) : base(options) {
         }
 
-        public SupportSlot Find(int ID)
+        public  IEnumerable<SupportSlot> FindAll()
         {
-            return SupportSlots.Where(e => e.ID == ID).SingleOrDefault();
+            return SupportSlots;
         }
 
         public IEnumerable<SupportSlot> Find(Func<SupportSlot, bool> where)
@@ -25,11 +25,13 @@ namespace BAU.Data.EntityFramework
             return SupportSlots.Include("Engineer").Where(where);
         }
 
-        public IEnumerable<SupportSlot> FindAll()
+
+        public SupportSlot FindById(int Id)
         {
-            return SupportSlots.ToList();
+            return SupportSlots.Where(e => e.ID == Id).SingleOrDefault();
         }
 
+       
         public void Add(SupportSlot slot)
         {
             SupportSlots.Add(slot);
@@ -46,9 +48,9 @@ namespace BAU.Data.EntityFramework
             this.SaveChanges();
         }
 
-        public void Remove(int id)
+        public void Remove(int Id)
         {
-            var entity = SupportSlots.Find(id);
+            var entity = SupportSlots.Find(Id);
             SupportSlots.Remove(entity);
             this.SaveChanges();
         }

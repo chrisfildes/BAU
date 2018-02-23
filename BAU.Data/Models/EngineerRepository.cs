@@ -9,16 +9,15 @@ namespace BAU.Data.EntityFramework
 {
     public class EngineerRepository : DbContext, IEngineerRepository
     {
-
         DbSet<Engineer> Engineers { get; set; }
 
         public EngineerRepository(DbContextOptions<EngineerRepository> options) : base(options) {
             
         }
 
-        public Engineer Find(int ID)
+        public IEnumerable<Engineer> FindAll()
         {
-            return Engineers.Find(ID);
+            return Engineers.ToList();
         }
 
         public IEnumerable<Engineer> Find(Func<Engineer, bool> where)
@@ -26,10 +25,11 @@ namespace BAU.Data.EntityFramework
             return Engineers.Where(where);
         }
 
-        public IEnumerable<Engineer> FindAll()
+        public Engineer FindById(int Id)
         {
-            return Engineers.ToList();
+            return Engineers.Find(Id);
         }
+
 
         public void Add(Engineer engineer)
         {
@@ -53,7 +53,5 @@ namespace BAU.Data.EntityFramework
             Engineers.Remove(entity);
             this.SaveChanges();
         }
-
-
     }
 }

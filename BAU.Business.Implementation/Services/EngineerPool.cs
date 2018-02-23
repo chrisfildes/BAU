@@ -30,7 +30,7 @@ namespace BAU.Business.Services
 
         public Engineer PullRandom()
         {
-            if (currentEngineers == null)
+            if (currentEngineers == null || currentEngineers.Count == 0)
             {
                 ResetPool();
             }
